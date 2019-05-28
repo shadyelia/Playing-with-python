@@ -1,4 +1,4 @@
-import KNN.KNN
+from KNN.KNN import KnnClasifier
 import pandas as pd
 
 
@@ -14,7 +14,7 @@ def main():
     dataset = pd.read_csv(path, names=names)
 
     print('1-KNN : ')
-    KNN.KNN.KnnClasifier(dataset, N=6)
+    KnnClasifier(dataset, N=6)
 
 
 if __name__ == '__main__':
