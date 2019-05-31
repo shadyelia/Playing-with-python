@@ -1,5 +1,6 @@
 from KNN.KNN import KnnClasifier
 import pandas as pd
+from SVM.SVM import SVMClasifier
 
 
 def main():
@@ -13,8 +14,11 @@ def main():
     # Read dataset to pandas dataframe
     dataset = pd.read_csv(path, names=names)
 
-    print('1-KNN : ')
-    KnnClasifier(dataset, N=6)
+    # print('1-KNN : ')
+    # KnnClasifier(dataset, N=6)
+
+    print('2-SVM : ')
+    SVMClasifier(dataset)
 
 
 if __name__ == '__main__':

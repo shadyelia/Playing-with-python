@@ -13,8 +13,8 @@ def KnnClasifier(dataset, N=5):
     attributes = dataset.iloc[:, :-1].values
     labels = dataset.iloc[:, 4].values
 
-    header_attributes = attributes[0]
-    header_labels = labels[0]
+    #header_attributes = attributes[0]
+    #header_labels = labels[0]
 
     # 2. divide our dataset into training and test splits
     attributes_train, attributes_test, labels_train, labels_test = train_test_split(
