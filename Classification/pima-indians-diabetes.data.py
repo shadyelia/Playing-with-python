@@ -5,6 +5,7 @@ from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from Naive_Bayes.GaussianBayesClassifier import GaussianClassifier
+from Naive_Bayes.GaussianBayesClassifier_implement import GaussianClassifier_Implement
 
 
 def main():
@@ -31,9 +32,12 @@ def main():
     SVMClasifier(attributes_train, attributes_test,
                  labels_train, labels_test, CValue=1)
 
-    print('3-Bayse : ')
+    print('3-Gaussian Bayes : ')
     GaussianClassifier(attributes_train, attributes_test,
                        labels_train, labels_test)
+
+    print('4-Gaussian Bayes (implemented) : ')
+    GaussianClassifier_Implement(dataset.values)
 
 
 if __name__ == '__main__':
