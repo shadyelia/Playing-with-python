@@ -4,11 +4,12 @@ from SVM.SVM import SVMClasifier
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+from Naive_Bayes.GaussianBayesClassifier import GaussianClassifier
 
 
 def main():
-    """Classifcation to IRIS data set with different ways"""
-    path = 'Classification\\cars_dataset.csv'
+    """Classifcation to cars dataset set with different ways"""
+    path = 'cars_dataset.csv'
 
     # Assign colum names to the dataset
     names = ['buying', 'maint',
@@ -98,6 +99,10 @@ def main():
     print('2-SVM : ')
     SVMClasifier(attributes_train, attributes_test,
                  labels_train, labels_test)
+
+    print('3-Bayse : ')
+    GaussianClassifier(attributes_train, attributes_test,
+                       labels_train, labels_test)
 
 
 if __name__ == '__main__':
