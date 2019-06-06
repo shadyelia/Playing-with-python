@@ -1,4 +1,5 @@
 from sklearn.naive_bayes import GaussianNB
+from sklearn import metrics
 
 
 def GaussianClassifier(attributes_train, attributes_test, labels_train, labels_test):
@@ -7,8 +8,4 @@ def GaussianClassifier(attributes_train, attributes_test, labels_train, labels_t
     # Predictions
     labels_pred = classifier.predict(attributes_test)
     # Evaluating the Algorithm
-    acc = 0
-    for i in range(len(labels_test)):
-        if(labels_test[i] == labels_pred[i]):
-            acc += 1
-    print(acc / len(labels_test))
+    print("Accuracy:", metrics.accuracy_score(labels_test, labels_pred))

@@ -1,7 +1,6 @@
 from KNN.KNN import KnnClasifier
 import pandas as pd
 from SVM.SVM import SVMClasifier
-from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from Naive_Bayes.GaussianBayesClassifier import GaussianClassifier
