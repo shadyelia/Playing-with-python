@@ -5,6 +5,7 @@ from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from Naive_Bayes.GaussianBayesClassifier import GaussianClassifier
+from sklearn import preprocessing
 
 
 def main():
@@ -24,73 +25,23 @@ def main():
     labels = dataset.iloc[:, 6].values
 
     # 2. convert data to numeric
-    numericAttributes = []
-    numericLabels = []
-    for label in labels[1:]:
-        if label == 'unacc':
-            numericLabels.append(0)
-        elif label == 'acc':
-            numericLabels.append(1)
-        elif label == 'good':
-            numericLabels.append(2)
-        elif label == 'vgood':
-            numericLabels.append(3)
-
-    for attribute in attributes[1:]:
-        numericAttribute = []
-        if(attribute[0] == 'low'):
-            numericAttribute.append(0)
-        elif (attribute[0] == 'med'):
-            numericAttribute.append(1)
-        elif(attribute[0] == 'high'):
-            numericAttribute.append(2)
-        elif (attribute[0] == 'vhigh'):
-            numericAttribute.append(3)
-
-        if(attribute[1] == 'low'):
-            numericAttribute.append(0)
-        elif (attribute[1] == 'med'):
-            numericAttribute.append(1)
-        elif(attribute[1] == 'high'):
-            numericAttribute.append(2)
-        elif (attribute[1] == 'vhigh'):
-            numericAttribute.append(3)
-
-        if(attribute[2] == 'two'):
-            numericAttribute.append(0)
-        elif (attribute[2] == 'three'):
-            numericAttribute.append(1)
-        elif(attribute[2] == 'four'):
-            numericAttribute.append(2)
-        elif (attribute[2] == '5more'):
-            numericAttribute.append(3)
-
-        if(attribute[3] == 'two'):
-            numericAttribute.append(0)
-        elif (attribute[3] == 'four'):
-            numericAttribute.append(1)
-        elif(attribute[3] == 'more'):
-            numericAttribute.append(2)
-
-        if(attribute[4] == 'small'):
-            numericAttribute.append(0)
-        elif (attribute[4] == 'med'):
-            numericAttribute.append(1)
-        elif(attribute[4] == 'big'):
-            numericAttribute.append(2)
-
-        if(attribute[5] == 'low'):
-            numericAttribute.append(0)
-        elif (attribute[5] == 'med'):
-            numericAttribute.append(1)
-        elif(attribute[5] == 'high'):
-            numericAttribute.append(2)
-
-        numericAttributes.append(numericAttribute)
+    le = preprocessing.LabelEncoder()
+    buying, maint, doors, persons, lug_boot, safety = attributes[:,
+                                                                 0], attributes[:, 1], attributes[:, 2], attributes[:, 3], attributes[:, 4], attributes[:, 5]
+    numericAttributes = zip(le.fit_transform(buying[1:]), le.fit_transform(maint[1:]), le.fit_transform(
+        doors[1:]), le.fit_transform(persons[1:]), le.fit_transform(lug_boot[1:]), le.fit_transform(safety[1:]))
+    numericLabels = le.fit_transform(labels[1:])
 
     # 3. divide our dataset into training and test splits
     attributes_train, attributes_test, labels_train, labels_test = train_test_split(
-        numericAttributes, numericLabels, test_size=0.20)
+        list(numericAttributes), list(numericLabels), test_size=0.20)
+
+    # 4.Feature Scaling (normalization)
+    scaler = StandardScaler()
+    scaler.fit(attributes_train)
+
+    attributes_train = scaler.transform(attributes_train)
+    attributes_test = scaler.transform(attributes_test)
 
     print('1-KNN : ')
     KnnClasifier(attributes_train, attributes_test,

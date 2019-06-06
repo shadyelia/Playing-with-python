@@ -24,6 +24,13 @@ def main():
     attributes_train, attributes_test, labels_train, labels_test = train_test_split(
         attributes, labels, test_size=0.20)
 
+    # 3.Feature Scaling (normalization)
+    scaler = StandardScaler()
+    scaler.fit(attributes_train)
+
+    attributes_train = scaler.transform(attributes_train)
+    attributes_test = scaler.transform(attributes_test)
+
     print('1-KNN : ')
     KnnClasifier(attributes_train, attributes_test,
                  labels_train, labels_test, N=2)
